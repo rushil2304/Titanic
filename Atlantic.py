@@ -24,34 +24,34 @@ data_test = pd.read_csv(r"C:\Users\Rushil\Desktop\training\Titanic\test.csv")
 
 # Display basic structure and info
 print("\n" + "="*60)
-print("Train Data - Head:")
+
 print(data.head())
 
 print("\n" + "="*60)
-print("Test Data - Head:")
+
 print(data_test.head())
 
 print("\n" + "="*60)
-print("Train Data - Tail:")
+
 print(data.tail())
 
 print("\n" + "="*60)
-print("Test Data - Tail:")
+
 print(data_test.tail())
 
 print("\n" + "="*60)
-print("Train Data - Description:")
+
 print(data.describe())
 
 print("\n" + "="*60)
-print("Missing Values in Training Data:")
+
 print(data.isnull().sum())
 
 print("\n" + "="*60)
-print("Missing Values in Test Data:")
+
 print(data_test.isnull().sum())
 
-# Handle missing values
+# Handle missing values by filling with median for numerical features
 data['Age'].fillna(data['Age'].median(), inplace=True)
 data_test['Age'].fillna(data_test['Age'].median(), inplace=True)
 data_test['Fare'].fillna(data_test['Fare'].median(), inplace=True)
@@ -75,27 +75,27 @@ for col in data_test.select_dtypes(include='object').columns:
     else:
         data_test[col] = LabelEncoder().fit_transform(data_test[col])
 
-# EDA - Correlation Heatmap
+# Generates the Correlation Heatmap
 plt.figure(figsize=(10, 8))
 sns.heatmap(data.corr(), annot=True, cmap='coolwarm')
 plt.title("Correlation Matrix")
 plt.show()
 
-# EDA - Pairplot
+# Pairplot
 sns.pairplot(data, hue='Survived', diag_kind='kde', palette='coolwarm')
 plt.show()
 
-# EDA - Countplot for Gender
+# Countplot for Gender
 sns.countplot(x='Sex', hue='Survived', data=data)
 plt.title('Survival by Gender')
 plt.show()
 
-# EDA - Age Distribution
+# Age Distribution
 sns.histplot(data=data, x='Age', hue='Survived', bins=30, kde=True)
 plt.title('Age Distribution by Survival')
 plt.show()
 
-# EDA - Pclass vs Survival
+# Pclass vs Survival
 sns.countplot(x='Pclass', hue='Survived', data=data)
 plt.title('Survival by Passenger Class')
 plt.show()
@@ -132,7 +132,7 @@ model.fit(X_train, Y_train)
 train_preds = model.predict(X_train)
 test_preds = model.predict(X_test)
 
-# Evaluation
+# Evaluation Matrix
 print("\n" + "="*60)
 print(f"Model: {model}")
 print(f"Training Accuracy: {accuracy_score(Y_train, train_preds):.4f}")
@@ -141,7 +141,7 @@ print(f"Testing Accuracy : {accuracy_score(Y_test, test_preds):.4f}")
 print("\nClassification Report (Test Data):")
 print(classification_report(Y_test, test_preds))
 
-# Confusion Matrix
+#Generates Confusion Matrix
 cm = confusion_matrix(Y_test, test_preds)
 plt.figure(figsize=(6, 4))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=model.classes_, yticklabels=model.classes_)
@@ -154,7 +154,7 @@ plt.show()
 # Final Prediction on test set
 final_predictions = model.predict(X_scaled_test)
 
-# Save output
+# Saves output in CSV forma
 output = pd.DataFrame({'PassengerId': test_passenger_ids, 'Survived': final_predictions})
 output.to_csv('result_new.csv', index=False)
 print("\nSubmission file created: result_new.csv")
