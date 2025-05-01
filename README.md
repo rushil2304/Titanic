@@ -19,15 +19,7 @@ The objective is to apply classification algorithms to predict whether a passeng
 - Files:
   - `train.csv` — Training data with survival labels
   - `test.csv` — Test data for predictions
-
-## 🛠️ Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/rushil2304/Titanic.git
-cd Titanic
-
+ 
 ## Approach
 1)Load the Data
 
@@ -79,5 +71,17 @@ Classification Report (Test Data):
 weighted avg       0.84      0.84      0.84       179
 
 ![Figure_1](https://github.com/user-attachments/assets/d7c77fa6-22c3-4cb9-b1a9-d7ec99f256ef)
+
+
+## 🛠️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/rushil2304/Titanic.git
+cd Titanic
+
+
+
 
 
